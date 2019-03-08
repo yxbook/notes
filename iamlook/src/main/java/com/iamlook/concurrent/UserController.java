@@ -1,5 +1,7 @@
 package com.iamlook.concurrent;
 
+import java.util.HashMap;
+
 /**
  * @program: notes
  * @description:
@@ -11,10 +13,29 @@ public class UserController {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 
         User user = new User();
-        User user1 = User.class.newInstance();
+        User user1 = new User();
+       /* *//*User user1 = User.class.newInstance();*//*
         User user2 = (User) Class.forName("com.iamlook.concurrent.User").newInstance();
+        System.out.println(user2.i);*/
+
+
+
+
+        System.out.println(user.equals(user1));
         System.out.println(user == user1);
-        System.out.println(user == user2);
+        System.out.println();
+        System.out.println(user.hashCode());
+        System.out.println(user1.hashCode());
+
+
+        HashMap map = new HashMap();
+        map.put(user, "11111");
+        map.put(user1, "222222");
+
+
+        System.out.println(map.get(user));
+        System.out.println(map.get(user1));
+
     }
 
 
