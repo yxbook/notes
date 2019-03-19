@@ -12,11 +12,13 @@ public class UserController {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 
-        User user = new User();
+
+
+        /*User user = new User();
         User user1 = new User();
-       /* *//*User user1 = User.class.newInstance();*//*
+       *//* *//**//*User user1 = User.class.newInstance();*//**//*
         User user2 = (User) Class.forName("com.iamlook.concurrent.User").newInstance();
-        System.out.println(user2.i);*/
+        System.out.println(user2.i);*//*
 
 
 
@@ -34,7 +36,7 @@ public class UserController {
 
 
         System.out.println(map.get(user));
-        System.out.println(map.get(user1));
+        System.out.println(map.get(user1));*/
 
     }
 

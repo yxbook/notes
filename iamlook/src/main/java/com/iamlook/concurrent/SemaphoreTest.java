@@ -26,7 +26,7 @@ public class SemaphoreTest {
      首先线程使用Semaphore的acquire()方法获取一个许可证，使用完之后调用release()方法归还许可证
     */
     public static void main(String[] args) {
-        for (int i = 0; i < THREAD_COUNT; i++) {
+        for (int i = 0; i < 1000; i++) {
             threadPool.execute(new Runnable() {
                 public void run() {
                     try {
