@@ -2,18 +2,19 @@ package com.iamlook.design.chain;
 
 /**
  * @program: notes
- * @description:
+ * @description: 责任链模式妙用
  * @author: Created by youxun
- * @create: 2019-03-22 11:31
  **/
 public abstract class AbstractLogger {
 
-    public static  int INFO = 1;
-    public static  int DEBUG = 2;
-    public static  int ERROR = 3;
-
+    /*
+    判断是否进入下一个节点参数
+     */
     protected int level;
 
+    /*
+    下一个责任点
+     */
     protected AbstractLogger nextLogger;
 
     public void setNextLogger(AbstractLogger nextLogger) {
@@ -22,13 +23,22 @@ public abstract class AbstractLogger {
 
     public void logMessage(int level, String message){
         if(this.level <= level){
-            write(message);
+            /*
+            如果当前节点可以处理，直接处理
+             */
+            excute(message);
         }
-        if(nextLogger !=null){
+        /*
+          如果当前节点不能处理，并且有下个节点，交由下个节点处理
+         */
+        if(null != nextLogger){
             nextLogger.logMessage(level, message);
         }
     }
 
-    abstract protected void write(String message);
+    /*
+    执行业务逻辑代码
+     */
+    abstract protected void excute(String message);
 
 }

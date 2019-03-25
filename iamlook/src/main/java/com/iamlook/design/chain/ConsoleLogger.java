@@ -13,9 +13,11 @@ public class ConsoleLogger extends  AbstractLogger{
     }
 
     @Override
-    protected void write(String message) {
+    protected void excute(String message) {
 
         System.out.println("ConsoleLogger Console::Logger: " + message);
 
     }
+
+
 }

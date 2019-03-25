@@ -13,7 +13,7 @@ public class FileLogger extends  AbstractLogger{
     }
 
     @Override
-    protected void write(String message) {
+    protected void excute(String message) {
 
         System.out.println("FileLogger Console::Logger: " + message);
 

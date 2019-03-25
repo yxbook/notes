@@ -13,7 +13,7 @@ public class ErrorLogger extends  AbstractLogger{
     }
 
     @Override
-    protected void write(String message) {
+    protected void excute(String message) {
 
         System.out.println("ErrorLogger Console::Logger: " + message);
 
