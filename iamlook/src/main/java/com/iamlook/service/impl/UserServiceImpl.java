@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @program: notes
@@ -15,6 +19,12 @@ import java.util.List;
  **/
 @Service
 public class UserServiceImpl implements IUserService{
+
+    Map<String, Lock> lockMap = new ConcurrentHashMap<>();
+
+    Map<String, Object> downMap = new ConcurrentHashMap<>();
+
+
     @Override
     public List<String> queryUserList(HashMap hashMap) {
         List<String> list = new ArrayList<>();
@@ -30,5 +40,121 @@ public class UserServiceImpl implements IUserService{
         List<String> list = new ArrayList<>();
         list.add("I am English");
         return list;
+    }
+
+
+    /**
+     *
+     * 缓存失效的情况：
+     * 1、高峰期大面积缓存key失效
+     * 2、局部高峰，热点缓存失效
+     * 3、redis服务重启，内存中缓存数据丢失
+     *
+     *
+     *
+     * lock锁的特性：排他，互斥，阻塞
+     * 锁方案的优缺点：
+     * 1、阻塞其他线程，用户体验不好
+     * 2、锁的颗粒度太大，造成阻塞（解决方案，降低锁的粒度，同易类型的查询单独加锁）
+     *
+     * 缓存降级方案的优缺点：
+     * 1、灵活多变，可根据业务场景调整
+     * 2、使用场景比较丰富
+     *
+     * 缓存雪崩推荐使用降级策略
+     *
+     *
+     *
+     *
+     *
+     * 其他问题：
+     * redis如何实现 红包。投票。购物车，如何保证一致性
+     * 如何实现分布式session
+     * 如何实现分布式锁
+     *
+     *
+     */
+
+    @Override
+    public List queryUserList(int id) {
+        //1、先从缓存中获取数据
+
+        System.out.println(Thread.currentThread().getName() + "从缓存中获取到数据");
+
+        //2、锁机制
+        /**
+         *
+         Lock lock = lockMap.get(id);
+         if(null == lock){
+         lock = new ReentrantLock();
+         lockMap.put("queryUserList_"+id, lock);
+
+         }
+
+         lock.lock();
+         *
+         */
+
+        String key = "queryUserList_"+id;
+
+
+        // --------  加锁的方案---------
+
+        Lock lock = lockMap.putIfAbsent(key, new ReentrantLock());
+        if(null == lock){
+            lock = lockMap.get(key);
+        }
+        lock.lock();
+
+
+        try {
+
+            //3、从数据库中获取
+
+            //A、先从缓存中获取、获取不到在查询数据库
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+
+
+        //------------------降级方案
+
+
+        //判断是否有正在进行查询数据库的线程，如果有进行缓存降级策略
+        boolean flag = downMap.putIfAbsent(key, "xxxxx") == null;
+        if(flag){
+
+            //3、从数据库中获取
+
+            //A、先从缓存中获取、获取不到在查询数据库
+
+
+
+        }else {
+
+            //缓存降级方案
+            //1、可以重试几次
+            //2、返回默认值
+            //3、返回提示用户重新操作
+            //4、主备策略，双机热备
+            //...........
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+        return null;
     }
 }

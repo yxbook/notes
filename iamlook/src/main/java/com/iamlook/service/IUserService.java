@@ -15,4 +15,6 @@ public interface IUserService {
     List<String> queryUserList(HashMap hashMap);
 
     List queryUserList2(HashMap paraMap);
+
+    List queryUserList(int i);
 }
