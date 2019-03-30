@@ -1,11 +1,11 @@
 package com.iamlook.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.iamlook.mapper.UserMapper;
 import com.iamlook.model.User;
 import com.iamlook.service.IUserService;
+import com.iamlook.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -31,10 +30,7 @@ public class UserServiceImpl implements IUserService{
     Map<String, Object> downMap = new ConcurrentHashMap<>();
 
     @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
-    @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisUtils redisUtils;
 
     @Autowired
     private UserMapper userMapper;
@@ -53,18 +49,38 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public List queryAll() {
+        Lock lock = null;
+        try {
+            //1、先从缓存中获取数据
+            String key = "queryUserList_"+123123;
+            String value = (String) redisUtils.get(key);
+            if(value != null){
+                return JSON.parseArray(value, User.class);
+            }
+            lock = lockMap.putIfAbsent(key, new ReentrantLock());
+            if(null == lock){
+                lock = lockMap.get(key);
+            }
 
-//1、先从缓存中获取数据
-        String key = "queryUserList_"+123123;
+            lock.lock();
 
+            value = (String) redisUtils.get(key);
 
-        String value = stringRedisTemplate.opsForValue().get(key);
-
-        if(null == value){
-            System.out.println(Thread.currentThread().getName() + "从缓存中获取到数据");
-            stringRedisTemplate.opsForValue().set("aaa", "111", 10, TimeUnit.SECONDS);
+            if(value == null){
+                System.out.println(Thread.currentThread().getName() + "从数据库获取========");
+                List<User> list = userMapper.getAll();
+                redisUtils.set(key, JSON.toJSONString(list), 10);
+                return list;
+            }else{
+                System.out.println(Thread.currentThread().getName() + "从缓存中获取");
+                return JSON.parseArray(value, User.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            lock.unlock();
         }
-        return userMapper.getAll();
     }
 
 
@@ -106,11 +122,11 @@ public class UserServiceImpl implements IUserService{
         String key = "queryUserList_"+id;
 
 
-        String value = stringRedisTemplate.opsForValue().get(key);
+        String value = (String) redisUtils.get(key);
 
         if(null == value){
             System.out.println(Thread.currentThread().getName() + "从缓存中获取到数据");
-            stringRedisTemplate.opsForValue().set("aaa", "111", 10, TimeUnit.SECONDS);
+            redisUtils.set("aaa", "111", 10);
         }
 
 
@@ -139,11 +155,10 @@ public class UserServiceImpl implements IUserService{
         }
         lock.lock();
 
-
         try {
 
             //3、从数据库中获取
-            userMapper.getAll();
+            List<User> list = userMapper.getAll();
 
             //A、先从缓存中获取、获取不到在查询数据库
 

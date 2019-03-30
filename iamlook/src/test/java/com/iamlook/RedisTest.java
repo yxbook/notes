@@ -1,5 +1,6 @@
 package com.iamlook;
 
+import com.alibaba.fastjson.JSON;
 import com.iamlook.model.User;
 import com.iamlook.service.IUserService;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class RedisTest {
 	@Autowired
 	private IUserService userService;
 
-	private int threadCount=10;//线程数量
+	private int threadCount=1;//线程数量
 
 	private CountDownLatch countDown=new CountDownLatch(threadCount);//CountDownLatch
 
@@ -29,7 +30,8 @@ public class RedisTest {
 				@Override
 				public void run() {
 					countDown.countDown();
-					List<User> result = userService.queryAll();
+					List result = userService.queryAll();
+					System.out.println(JSON.toJSONString(result));
 				}
 			}).start();
 
