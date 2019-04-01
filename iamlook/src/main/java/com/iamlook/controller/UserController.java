@@ -2,8 +2,13 @@ package com.iamlook.controller;
 
 import com.iamlook.model.User;
 import com.iamlook.service.IUserService;
+import com.iamlook.utils.RedisUtils;
 import com.iamlook.utils.SpringContextUtil;
+import org.redisson.Redisson;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.locks.Lock;
 
 /**
  * @program: notes
@@ -24,6 +31,12 @@ public class UserController {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private Redisson redisson;
 
 
     @PostMapping(value = "getUserList")
@@ -48,6 +61,33 @@ public class UserController {
 
 
         return userService.queryAll();
+
+    }
+
+
+    /**
+     * 模拟减库存，redis分布式锁实现
+     * @return
+     */
+    @PostMapping(value = "reduceStock")
+    public String reduceStock(String userName){
+        //分布式锁
+        String lockKey = "lockKey";
+        RLock lock = redisson.getLock(lockKey);
+        lock.lock();
+        try {
+            int stock = (int) redisTemplate.opsForValue().get("stock");
+            if(stock > 0){
+                int reduce = stock - 1;
+                redisTemplate.opsForValue().set("stock", reduce);
+                System.out.println("扣除成功，剩余库存=：" + reduce);
+            }else {
+                System.out.println("库存不足");
+            }
+        } finally {
+            lock.unlock();
+        }
+        return "success";
 
     }
 

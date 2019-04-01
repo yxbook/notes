@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iamlook.utils.RedisUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.redisson.Redisson;
+import org.redisson.config.Config;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -18,6 +19,12 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @Configuration
 @EnableCaching
 public class RedisConfig {
+
+   /* @Value("${spring.redis.clusters}")
+    private  String cluster;
+    @Value("${spring.redis.password}")
+    private String password;*/
+
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
@@ -54,7 +61,27 @@ public class RedisConfig {
     }
 
 
+    @Bean
+    public Redisson redisson(){
 
+
+        /*String[] nodes = cluster.split(",");
+        //redisson版本是3.5，集群的ip前面要加上“redis://”，不然会报错，3.2版本可不加
+        for(int i=0;i<nodes.length;i++){
+            nodes[i] = "redis://"+nodes[i];
+        }*/
+        Config config = new Config();
+       /* //这是用的集群server
+        config.useClusterServers()
+        .setScanInterval(2000)//设置集群状态扫描时间
+        .addNodeAddress(nodes).setPassword(password);*/
+        //单机
+        config.useSingleServer().setAddress("redis://127.0.0.1:6379").setDatabase(0);
+        return (Redisson) Redisson.create(config);
+
+
+
+    }
 
     /**
      * 注入封装RedisTemplate

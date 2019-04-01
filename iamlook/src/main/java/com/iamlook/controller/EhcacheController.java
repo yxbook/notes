@@ -49,6 +49,18 @@ public class EhcacheController {
 
     @Cacheable(value="users", key="#p0")
 
+    @Cacheable(cacheNames = "product",key = "#sellerId"，unless = "#result.getCode() != 0")
+    依据结果来判断是否缓存 unless = “#result.getCode() != 0”,#result其实就是ResultVO，也就是返回的对象
+    unless(除什么之外,如果不 的意思) 如果=0就缓存，需要写成!=0。理解起来就是，除了不等于0的情况之外，才缓存，也就是等于0才缓存。
+
+
+    @Cacheable(cacheNames = "product",key = "#sellerId"，condition = "#sellerId.length() > 3")
+    这样只有条件成立才会直接返回缓存，结果不成立是不缓存的，即使有缓存，也会运行方法
+
+
+
+
+
 
 
 
