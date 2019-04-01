@@ -2,12 +2,8 @@ package com.iamlook.redis;
 
 import com.iamlook.service.IUserService;
 import org.junit.Test;
-import org.junit.internal.runners.statements.RunBefores;
 
-import java.util.HashMap;
-import java.util.Random;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /***
  * @Description:

@@ -2,11 +2,9 @@ package com.iamlook.controller;
 
 import com.iamlook.model.User;
 import com.iamlook.service.IUserService;
-import com.iamlook.utils.RedisUtils;
 import com.iamlook.utils.SpringContextUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.locks.Lock;
 
 /**
  * @program: notes
