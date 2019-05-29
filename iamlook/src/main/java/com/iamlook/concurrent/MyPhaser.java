@@ -13,6 +13,7 @@ public class MyPhaser extends Phaser {
             if (phase == 0) {
                 // ....
                 System.out.println("第一阶段：所有参赛者都到达了起跑点！");
+                System.out.println("PR测试测试");
             } else if (phase == 1) {
                 // ....
                 System.out.println("第二阶段：所有参赛者都已经就位，并准备好！比赛正式开始");
