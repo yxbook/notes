@@ -1,6 +1,15 @@
 package com.iamlook.service.impl;
 
+<<<<<<< HEAD
 import com.iamlook.service.IUserService;
+=======
+import com.alibaba.fastjson.JSON;
+import com.iamlook.mapper.UserMapper;
+import com.iamlook.model.User;
+import com.iamlook.service.IUserService;
+import com.iamlook.utils.RedisUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +33,16 @@ public class UserServiceImpl implements IUserService{
 
     Map<String, Object> downMap = new ConcurrentHashMap<>();
 
+<<<<<<< HEAD
+=======
+    @Autowired
+    private RedisUtils redisUtils;
+
+    @Autowired
+    private UserMapper userMapper;
+
+
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
 
     @Override
     public List<String> queryUserList(HashMap hashMap) {
@@ -36,10 +55,46 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
+<<<<<<< HEAD
     public List queryUserList2(HashMap paraMap) {
         List<String> list = new ArrayList<>();
         list.add("I am English");
         return list;
+=======
+    public List queryAll() {
+        Lock lock = null;
+        try {
+            //1、先从缓存中获取数据
+            String key = "queryUserList_"+123123;
+            String value = (String) redisUtils.get(key);
+            if(value != null){
+                return JSON.parseArray(value, User.class);
+            }
+            lock = lockMap.putIfAbsent(key, new ReentrantLock());
+            if(null == lock){
+                lock = lockMap.get(key);
+            }
+
+            lock.lock();
+
+            value = (String) redisUtils.get(key);
+
+            if(value == null){
+                System.out.println(Thread.currentThread().getName() + "从数据库获取========");
+                List<User> list = userMapper.getAll();
+                redisUtils.set(key, JSON.toJSONString(list), 10);
+                return list;
+            }else{
+                System.out.println(Thread.currentThread().getName() + "从缓存中获取");
+                return JSON.parseArray(value, User.class);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally {
+            lock.unlock();
+        }
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
     }
 
 
@@ -76,10 +131,26 @@ public class UserServiceImpl implements IUserService{
      */
 
     @Override
+<<<<<<< HEAD
     public List queryUserList(int id) {
         //1、先从缓存中获取数据
 
         System.out.println(Thread.currentThread().getName() + "从缓存中获取到数据");
+=======
+    public List<User> queryUserList(int id) {
+        //1、先从缓存中获取数据
+        String key = "queryUserList_"+id;
+
+
+        String value = (String) redisUtils.get(key);
+
+        if(null == value){
+            System.out.println(Thread.currentThread().getName() + "从缓存中获取到数据");
+            redisUtils.set("aaa", "111", 10);
+        }
+
+
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
 
         //2、锁机制
         /**
@@ -95,7 +166,10 @@ public class UserServiceImpl implements IUserService{
          *
          */
 
+<<<<<<< HEAD
         String key = "queryUserList_"+id;
+=======
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
 
 
         // --------  加锁的方案---------
@@ -106,10 +180,17 @@ public class UserServiceImpl implements IUserService{
         }
         lock.lock();
 
+<<<<<<< HEAD
 
         try {
 
             //3、从数据库中获取
+=======
+        try {
+
+            //3、从数据库中获取
+            List<User> list = userMapper.getAll();
+>>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
 
             //A、先从缓存中获取、获取不到在查询数据库
 
