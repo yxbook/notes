@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * @program: notes
@@ -14,7 +13,7 @@ import java.util.function.Function;
  * @author: Created by youxun
  * @create: 2019-04-03 13:48
  **/
-public class LambadaTest {
+public class PullRewquestTest {
 
     @Test
     public void test(){
@@ -34,7 +33,7 @@ public class LambadaTest {
         names2.add("Sina ");
 
 
-        LambadaTest test = new LambadaTest();
+        PullRewquestTest test = new PullRewquestTest();
         test.sortUsingJava7(names2);
         test.sortUsingJava8(names1);
 
@@ -74,7 +73,7 @@ public class LambadaTest {
 
     @Test
     public void test2(){
-        LambadaTest tester = new LambadaTest();
+        PullRewquestTest tester = new PullRewquestTest();
         System.out.println("10 + 5 = " + tester.operate(10, 5, addition));
         System.out.println("10 - 5 = " + tester.operate(10, 5, subtraction));
         System.out.println("10 x 5 = " + tester.operate(10, 5, multiplication));

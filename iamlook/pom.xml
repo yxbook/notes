@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.4.RELEASE</version>
+        <version>2.1.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -54,9 +54,6 @@
         </dependency>
         <!--开启缓存 整合Ehcache-->
 
-<<<<<<< HEAD
-=======
-
         <!--整合Redis-->
         <dependency>
             <groupId>org.springframework.session</groupId>
@@ -66,16 +63,13 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
->>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-<<<<<<< HEAD
         <!--开启缓存 整合Redis-->
 
-=======
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -121,8 +115,6 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.0.0</version>
         </dependency>
->>>>>>> 30f11e3654495d24a4f1456fab79ed8b4dbefdaa
-
 
 
         <dependency>
