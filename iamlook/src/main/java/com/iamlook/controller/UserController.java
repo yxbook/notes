@@ -1,14 +1,13 @@
 package com.iamlook.controller;
 
-import com.iamlook.service.IUserService;
-import com.iamlook.utils.SpringContextUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.iamlook.event.MyEvent;
 import com.iamlook.model.User;
 import com.iamlook.service.IUserService;
 import com.iamlook.utils.SpringContextUtil;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +36,9 @@ public class UserController {
 
     @Autowired
     private Redisson redisson;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
 
     @PostMapping(value = "getUserList")
@@ -97,7 +99,10 @@ public class UserController {
 
     @PostMapping(value = "test")
     public List test(){
-        return userService.test();
+
+        List list = userService.test();
+        applicationContext.publishEvent(new MyEvent(this, "小明", "我是一只小小鸟"));
+        return list;
 
     }
 
