@@ -52,4 +52,16 @@
        		 id =#{id}
     </delete>
 
+    <select id="getTestAll" resultType="java.util.HashMap">
+
+        select * from instrument;
+
+    </select>
+
+    <select id="getUserBeanAll" resultType="com.iamlook.model.UserBean">
+
+        select * from inspector;
+
+    </select>
+
 </mapper>

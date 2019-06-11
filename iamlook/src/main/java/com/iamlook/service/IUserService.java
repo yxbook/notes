@@ -22,4 +22,8 @@ public interface IUserService {
     List queryAll();
 
     List<User> queryUserList(int id);
+
+    List test();
+
+    List testUpCase();
 }

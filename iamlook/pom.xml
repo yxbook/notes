@@ -135,6 +135,12 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!--AOP统一处理日志-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -95,4 +95,21 @@ public class UserController {
 
     }
 
+    @PostMapping(value = "test")
+    public List test(){
+        return userService.test();
+
+    }
+
+    /**
+     * 驼峰转换
+     * @return
+     */
+    @PostMapping(value = "testUpCase")
+    public List testUpCase(){
+        return userService.testUpCase();
+
+    }
+
+
 }

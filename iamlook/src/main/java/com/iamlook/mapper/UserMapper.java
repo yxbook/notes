@@ -2,6 +2,7 @@ package com.iamlook.mapper;
 
 
 import com.iamlook.model.User;
+import com.iamlook.model.UserBean;
 
 import java.util.List;
 
@@ -16,5 +17,9 @@ public interface UserMapper {
 	void update(User user);
 
 	void delete(Long id);
+
+    List getTestAll();
+
+	List<UserBean> getUserBeanAll();
 
 }

@@ -200,4 +200,14 @@ public class UserServiceImpl implements IUserService{
 
         return null;
     }
+
+    @Override
+    public List test() {
+        return userMapper.getTestAll();
+    }
+
+    @Override
+    public List testUpCase() {
+        return userMapper.getUserBeanAll();
+    }
 }
