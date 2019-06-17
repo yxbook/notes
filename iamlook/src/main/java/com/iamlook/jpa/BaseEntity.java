@@ -1,3 +1,4 @@
+/*
 package com.iamlook.jpa;
 
 import com.baomidou.mybatisplus.annotation.*;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+*/
 /**
  * Base Entity
  * 声明各实体类的公共属性
@@ -20,7 +22,8 @@ import java.time.LocalDateTime;
  * @author 胡荆陵
  * @version 1.0
  * @since 2019-04-12
- */
+ *//*
+
 @Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -52,9 +55,11 @@ public class BaseEntity implements Serializable {
     @TableField(fill = FieldFill.INSERT)
     private Integer version; //版本锁
 
-    /**
+    */
+/**
      * 清除 baseEntity 各基础属性
-     */
+     *//*
+
     public void clearProps() {
         this.setId(null);
         this.setCreateTime(null);
@@ -63,9 +68,11 @@ public class BaseEntity implements Serializable {
     }
 
 
-    /**
+    */
+/**
      * 是否已删除
-     */
+     *//*
+
     @TableLogic
     @Column(name = "is_del", nullable = false)
     @TableField("is_del")
@@ -73,3 +80,4 @@ public class BaseEntity implements Serializable {
     private Byte isDel = 0;
 
 }
+*/
