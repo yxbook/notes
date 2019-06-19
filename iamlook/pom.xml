@@ -147,6 +147,17 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+
+        <dependency>
+
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+
+        </dependency>
+
+
 
         <!--解决jdk9出现异常Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/ValidationException-->
         <dependency>
