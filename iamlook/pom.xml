@@ -158,6 +158,14 @@
         </dependency>
 
 
+        <!--websocket客户端-->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
+
 
         <!--解决jdk9出现异常Caused by: java.lang.NoClassDefFoundError: javax/xml/bind/ValidationException-->
         <dependency>

@@ -1,3 +1,4 @@
+/*
 package com.iamlook.jpa;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,3 +37,4 @@ public class AbstractBaseTest {
         return null;
     }
 }
+*/

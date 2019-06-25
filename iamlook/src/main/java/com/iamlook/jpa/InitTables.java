@@ -1,3 +1,4 @@
+/*
 package com.iamlook.jpa;
 
 import cn.com.larunda.utils.ConfigurationUtil;
@@ -62,3 +63,4 @@ public class InitTables extends AbstractBaseTest {
     }
 
 }
+*/
