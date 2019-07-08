@@ -41,6 +41,18 @@ spring:
     type: ehcache
     ehcache:
       config: classpath:/ehcache.xml
+  kafka:
+    topic:
+      userTopic: user
+    bootstrap-servers: localhost:9092
+    producer:
+      batch-size: 65536
+      buffer-memory: 524288
+    consumer:
+      group-id: kafka001
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+
   redis:
     database: 0  # Redis数据库索引（默认为0）
     host: 127.0.0.1
