@@ -86,7 +86,7 @@ public class KafkaConfig {
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, KafkaJsonDeserializer.class);
     props.put(JsonDeserializer.KEY_DEFAULT_TYPE, String.class);
     props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, Object.class);
-    props.put(JsonDeserializer.TRUSTED_PACKAGES, "cn.swift.controllers.request");
+    props.put(JsonDeserializer.TRUSTED_PACKAGES, "com.iamlook.response");
     return props;
   }
 }

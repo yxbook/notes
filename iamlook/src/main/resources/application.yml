@@ -43,14 +43,14 @@ spring:
       config: classpath:/ehcache.xml
   kafka:
     topic:
-      userTopic: user
+      userTopic: fooo
     bootstrap-servers: localhost:9092
     producer:
       batch-size: 65536
       buffer-memory: 524288
     consumer:
-      group-id: kafka001
-      auto-offset-reset: earliest
+      group-id: kafka001  #group-id是所属分组（kafka要求一个分组的成员数量不能大于设置的分区数，否则同一个分组中多出的成员永远都不会收到消息）
+      auto-offset-reset: earliest  #auto-offset-reset设为earliest是获取以前就有过的消息（其实不是必要的配置）
       enable-auto-commit: true
 
   redis:
