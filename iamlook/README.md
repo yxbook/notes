@@ -5,3 +5,6 @@ kafka启动
 
 
 ./kafka-server-start.sh /home/sddt/kafka/kafka_2.11-2.3.0/config/server.properties
+
+后台启动
+./bin/kafka-server-start.sh -daemon config/server.properties &
