@@ -26,7 +26,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
-  @Value("${spring.kafka.bootstrap-servers:localhost:9092}")
+  @Value("${spring.kafka.bootstrap-servers:172.16.24.51:9092}")
   private String bootstrapServer;
 
   @Value("${spring.kafka.producer.batch-size: 65536}")

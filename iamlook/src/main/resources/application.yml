@@ -44,7 +44,7 @@ spring:
   kafka:
     topic:
       userTopic: fooo
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 172.16.24.51:9092
     producer:
       batch-size: 65536
       buffer-memory: 524288

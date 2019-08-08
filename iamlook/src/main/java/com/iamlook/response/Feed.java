@@ -41,6 +41,10 @@ public class Feed {
      *feed名称
      */
     private String name;
+    /**
+     *feed属性
+     */
+    private String feedProp;
 
     /**
      *feed单位code
