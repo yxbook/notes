@@ -39,6 +39,8 @@ public class TreeNode {
                     // 标记,循环结束后删除
                     tagNodes.add(node);
                 }
+            } else {
+                tagNodes.add(node);
             }
         }
         nodes.removeAll(tagNodes);
