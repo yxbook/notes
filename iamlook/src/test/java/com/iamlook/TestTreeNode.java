@@ -17,6 +17,23 @@ import java.util.Set;
  * 递归过滤树节点
  * 参考地址
  * https://blog.csdn.net/neweastsun/article/details/83933810
+ *
+ *
+ *           0
+ *        / |  \
+ *       1  2   3
+ *     /  \ |  / \
+ *    4   5 6  7  8
+ *
+ *    给定条件为：4 和 6，如果所有子节点都不符合条件，对应父节点也不显示。
+ *
+ *          0
+ *        / |
+ *       1  2
+ *     /    |
+ *    4     6
+ *
+ *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
