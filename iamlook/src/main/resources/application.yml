@@ -43,8 +43,8 @@ spring:
       config: classpath:/ehcache.xml
   kafka:
     topic:
-      userTopic: alarm-ELECTRICITY-8ba99d3d-6657-4efc-8788-ff824e3bbf41
-    bootstrap-servers: 172.16.24.53:9092
+      userTopic: feed-to-alarm
+    bootstrap-servers: 180.97.165.53:9092
     producer:
       batch-size: 65536
       buffer-memory: 524288

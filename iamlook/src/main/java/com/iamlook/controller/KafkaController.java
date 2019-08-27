@@ -3,6 +3,7 @@ package com.iamlook.controller;
 import com.iamlook.kafka.KafkaProducerService;
 import com.iamlook.response.BaseResponse;
 import com.iamlook.response.Feed;
+import com.iamlook.response.FeedVo;
 import com.iamlook.response.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class KafkaController {
     }
 
     @PostMapping("/sendFeed")
-    public BaseResponse<String> sendFeed(@RequestBody @Valid Feed feed) {
+    public BaseResponse<String> sendFeed(@RequestBody @Valid FeedVo feed) {
         kafkaProducerService.send(feed);
         return BaseResponse.success(null);
     }

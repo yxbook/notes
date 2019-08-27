@@ -1,5 +1,6 @@
 package com.iamlook.design.factory;
 
+
 import org.junit.Test;
 
 /**
