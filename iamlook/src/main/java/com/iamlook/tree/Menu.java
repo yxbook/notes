@@ -1,6 +1,5 @@
 package com.iamlook.tree;
 
-import cn.com.larunda.enumeration.MenuEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +11,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -33,7 +30,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "sys_menu")
-public class Menu extends BaseEntity {
+public class Menu  {
 
     /**
      * 菜单名称
@@ -101,12 +98,12 @@ public class Menu extends BaseEntity {
      *  定义中间表名，字段名
      *  通过关联查询按照seq升序排序
      */
-    @ManyToMany(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+   /* @ManyToMany(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name="sys_menu_to_res",
             joinColumns={@JoinColumn(name="menu_id")},
             inverseJoinColumns={@JoinColumn(name="res_id")})
     @OrderBy(value="seq ASC")
-    private Set<Resource> resources;
+    private Set<Resource> resources;*/
 
     /**
      * 比较

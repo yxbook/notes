@@ -1,12 +1,15 @@
+/*
 package com.iamlook.utils;
 
+*/
 /**
  * 菜单树工具类.
  *
  * @author yx
  * @version 1.0
  * @since 19-8-26上午9:09
- */
+ *//*
+
 
 
 import cn.com.larunda.enumeration.MenuEnum;
@@ -27,12 +30,14 @@ import java.util.Set;
 
 public class MenuTreeUtils {
 
-    /**
+    */
+/**
      * 插入新结点          输入父结点id进行定位 ，将新结点 插入到父结点的 sonList 中
      * @param changeNode  传入根结点,传入前需判断:若根结点不存在，待插入结点成为根结点，不必进入此方法
      * @param parentCode    新结点的 父结点id
      * @param newNode     新结点
-     */
+     *//*
+
     public static void insertNode(Menu changeNode, String parentCode, Menu newNode) {
         if (parentCode.equals(changeNode.getCode())) {
             changeNode.getChildren().add(newNode);
@@ -47,11 +52,13 @@ public class MenuTreeUtils {
         }
     }
 
-    /**
+    */
+/**
      * 遍历结点 并打印. 同时按每个结点所在深度 在结点前打印不同长度的空格
      * @param changeNode    根结点
      * @param depth        结点深度：1
-     */
+     *//*
+
     public static void loop(Menu changeNode, int depth, List<MenuNode> list){
         Set<Menu> children = changeNode.getChildren();
         if (children==null||children.isEmpty()){
@@ -81,11 +88,13 @@ public class MenuTreeUtils {
         }
     }
 
-    /**
+    */
+/**
      * 删除结点   注意:先判断 是否在删除 根结点. 若删除根结点,不必进入此方法 直接为null即可
      * @param changeNode 根结点
      * @param code         待删除结点id
-     */
+     *//*
+
     public static void deleteNode(Menu changeNode, String code) {
         Set<Menu> children = changeNode.getChildren();
         if (children == null || children.isEmpty()) {
@@ -106,13 +115,15 @@ public class MenuTreeUtils {
 
     }
 
-    /**
+    */
+/**
      * 同理可根据结点name修改结点id
      * 根据结点id  修改结点 name
      * @param changeNode 根结点
      * @param code         结点id
      * @param name       修改后的 新name
-     */
+     *//*
+
     public static void updateNode(Menu changeNode, String code, String name) {
         if (changeNode.getCode().equals(code)){
             changeNode.setName(name);
@@ -131,12 +142,14 @@ public class MenuTreeUtils {
 
     }
 
-    /**
+    */
+/**
      * 构造比较对象
      * @param children
      * @param set
      * @param parentCode
-     */
+     *//*
+
     public static void getComparingNode(Set<Menu> children, Set<MenuNode> set, String parentCode) {
         children.stream().forEach(a -> {
             MenuNode node = new MenuNode();
@@ -150,14 +163,16 @@ public class MenuTreeUtils {
         });
     }
 
-    /**
+    */
+/**
      * 初始化结构菜单
      * @param platformId
      * @param code
      * @param name
      * @param childrenNode
      * @return
-     */
+     *//*
+
     public static Menu initMenu(String platformId, String code, String name, Set<MenuDto> childrenNode) {
         //初始化菜单
         Set<Menu> children = new HashSet<>();
@@ -173,13 +188,15 @@ public class MenuTreeUtils {
         return parentMenu;
     }
 
-    /**
+    */
+/**
      * 菜单初始化子节点
      * @param platformId
      * @param parentMenu
      * @param childrenNode
      * @param children
-     */
+     *//*
+
     public static void init(String platformId, Menu parentMenu, Set<MenuDto> childrenNode, Set<Menu> children) {
         childrenNode.stream().forEach(m -> {
             if (MenuEnum.NODE == m.getType()) {
@@ -211,12 +228,14 @@ public class MenuTreeUtils {
         });
     }
 
-    /**
+    */
+/**
      * 查询 某个结点 到根结点的路径
      * @param changeNode 根结点
      * @param name       待查找的结点 name
      * @param wayList    路径
-     */
+     *//*
+
     public static void queryWayById(Menu changeNode, String name, List<String> wayList) {
         List<Menu> sonList = new ArrayList<>(changeNode.getChildren());
         wayList.add(changeNode.getName());
@@ -234,12 +253,14 @@ public class MenuTreeUtils {
     }
 
 
-    /**
+    */
+/**
      * 说明方法描述：将list转为树tree结构
      *
      * @param allMenuSet
      * @return
-     */
+     *//*
+
     public static Set<MenuNode> listToTree(Set<MenuNode> allMenuSet) {
 
         Set<MenuNode> listParentRecord = new HashSet<>();
@@ -273,14 +294,16 @@ public class MenuTreeUtils {
     }
 
 
-    /**
+    */
+/**
      * 说明方法描述：使list转换为树并根据关键字和节点名称过滤
      *
      * @param allMenuList 所有节点
      * @param name 要过滤的关键字
      * @param code 要过滤的字段
      * @return
-     */
+     *//*
+
     public static Set<MenuNode> filterMenuTree(Set<MenuNode> allMenuList, String name, String code) {
         Set<MenuNode> menuNodeSet = new HashSet<>();
         Map<String, MenuNode> allRecordMap = new HashMap<>();
@@ -307,13 +330,15 @@ public class MenuTreeUtils {
         return menuNodeSet;
     }
 
-    /**
+    */
+/**
      * 说明方法描述：递归查询子节点
      *
      * @param childList 子节点
      * @param parentUuid 父节点id
      * @return
-     */
+     *//*
+
     public static Set<MenuNode> getTreeChildRecord(Set<MenuNode> childList, String parentUuid) {
         Set<MenuNode> listParentRecord = new HashSet<>();
         Set<MenuNode> listNotParentRecord = new HashSet<>();
@@ -339,7 +364,8 @@ public class MenuTreeUtils {
         return listParentRecord;
     }
 
-    /**
+    */
+/**
      * 说明方法描述：递归找出本节点和他们的父节点
      *
      * @param parentList 根据关键字过滤出来的相关节点的父节点
@@ -347,7 +373,8 @@ public class MenuTreeUtils {
      * @param filterMap 已经过滤出来的节点
      * @param allMap 所有节点
      * @return
-     */
+     *//*
+
     public static Set<MenuNode> getSelfAndTheirParentMenu(Set<MenuNode> parentList, Set<MenuNode> resultList,
                                                             Map<String, MenuNode> filterMap,
                                                             Map<String, MenuNode> allMap) {
@@ -392,3 +419,4 @@ public class MenuTreeUtils {
     }
 
 }
+*/

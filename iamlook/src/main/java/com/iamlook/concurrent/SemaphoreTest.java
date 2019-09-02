@@ -15,7 +15,8 @@ import java.util.concurrent.Semaphore;
 public class SemaphoreTest {
 
     private static final int THREAD_COUNT = 30;
-    private static ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_COUNT);
+    //private static ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_COUNT);
+    private static ExecutorService threadPool = Executors.newCachedThreadPool();
     private static Semaphore s = new Semaphore(10);
 
 
