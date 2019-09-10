@@ -44,7 +44,7 @@ spring:
   kafka:
     topic:
       userTopic: feed-to-alarm
-    bootstrap-servers: 180.97.165.53:9092
+    bootstrap-servers: 192.168.188.83:9092
     producer:
       batch-size: 65536
       buffer-memory: 524288

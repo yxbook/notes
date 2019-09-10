@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumerService {
 
-  /*@KafkaListener(topics = {"${spring.kafka.topic.userTopic}"})*/
+  @KafkaListener(topics = {"${spring.kafka.topic.userTopic}"})
   public void consume(Object o) {
     System.out.println("kafka");
     System.out.println("kafka");
