@@ -1,0 +1,24 @@
+logging:
+  level:
+    web: debug
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 180000
+      max-lifetime: 1800000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: MyHikariCP
+    password: zxcvbnm
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.188.91:3306/iothub_dev?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: sddt
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+    show-sql: true
