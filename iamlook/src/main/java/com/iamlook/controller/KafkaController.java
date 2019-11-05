@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -33,9 +34,40 @@ public class KafkaController {
     }
 
     @PostMapping("/sendFeed")
-    public BaseResponse<String> sendFeed(@RequestBody @Valid FeedVo feed) {
+    public BaseResponse<String> sendFeed(@RequestBody @Valid FeedVo feed, HttpServletRequest request) {
         kafkaProducerService.send(feed);
+        System.out.println(getIpAddr(request));
         return BaseResponse.success(null);
+    }
+
+    @PostMapping("/sendFlink")
+    public BaseResponse<String> sendFlink(@RequestBody @Valid Feed feed, HttpServletRequest request) {
+        kafkaProducerService.send(feed);
+        System.out.println(getIpAddr(request));
+        return BaseResponse.success(null);
+    }
+    @PostMapping("/sendFlinkConfig")
+    public BaseResponse<String> sendFlinkConfig(@RequestBody @Valid Feed feed, HttpServletRequest request) {
+        kafkaProducerService.sendFlinkConfig(feed);
+        System.out.println(getIpAddr(request));
+        return BaseResponse.success(null);
+    }
+
+
+
+
+    public String getIpAddr(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return ip;
     }
 /*
 

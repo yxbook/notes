@@ -34,4 +34,21 @@ public class KafkaProducerService {
       }
     });
   }
+
+  public void sendFlinkConfig(Object message) {
+    ListenableFuture<SendResult<String, Object>> future = kafkaTemplate.send("feed-flink-config", message);
+    future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
+      @Override
+      public void onSuccess(SendResult<String, Object> result) {
+        log.info("Successfully publish to kafka with offset: {} and message: {}",
+                result.getRecordMetadata().offset(), message);
+      }
+
+      @Override
+      public void onFailure(Throwable ex) {
+        log.error("Unable to publish to kafka with message: {}, errorMessage: {}", message,
+                ex.getMessage());
+      }
+    });
+  }
 }

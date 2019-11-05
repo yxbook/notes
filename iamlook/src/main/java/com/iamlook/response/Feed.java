@@ -16,6 +16,8 @@ public class Feed {
 
     private String id;
 
+    private String userId;
+
     /**
      * 关联Input
      */

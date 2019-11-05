@@ -1,3 +1,5 @@
+/*
+
 package com.iamlook.kafka;
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,11 +10,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaConsumerService {
 
-  @KafkaListener(topics = {"${spring.kafka.topic.userTopic}"})
+  @KafkaListener(topics = {"alarm-LINKED-record"})
   public void consume(Object o) {
-    System.out.println("kafka");
+    System.out.println("kafka:" + o.toString());
     System.out.println("kafka");
     System.out.println("kafka");
     System.out.println("kafka");
   }
 }
+
+*/
