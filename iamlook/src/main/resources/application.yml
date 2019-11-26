@@ -14,8 +14,9 @@ spring:
       config: classpath:/ehcache.xml
   kafka:
     topic:
-      userTopic: feed-to-alarm
-      #sendTopic: feed-flink
+      #userTopic: feed-to-alarm
+      #userTopic: stream-calc-input-feed
+      userTopic: stream-calc-test
     bootstrap-servers: 192.168.188.81:9092
     producer:
       batch-size: 65536

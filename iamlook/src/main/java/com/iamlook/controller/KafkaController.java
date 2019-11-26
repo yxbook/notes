@@ -4,6 +4,7 @@ import com.iamlook.kafka.KafkaProducerService;
 import com.iamlook.response.BaseResponse;
 import com.iamlook.response.Feed;
 import com.iamlook.response.FeedVo;
+import com.iamlook.response.OriginalInput;
 import com.iamlook.response.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 
 /**
  * @program: notes
@@ -40,9 +42,11 @@ public class KafkaController {
         return BaseResponse.success(null);
     }
 
+
     @PostMapping("/sendFlink")
-    public BaseResponse<String> sendFlink(@RequestBody @Valid Feed feed, HttpServletRequest request) {
-        kafkaProducerService.send(feed);
+    public BaseResponse<String> sendFlink(@RequestBody @Valid OriginalInput input, HttpServletRequest request) {
+        input.setTime(new Date().getTime() + (int)(Math.random()*(100-1+1)));
+        kafkaProducerService.send(input);
         System.out.println(getIpAddr(request));
         return BaseResponse.success(null);
     }
