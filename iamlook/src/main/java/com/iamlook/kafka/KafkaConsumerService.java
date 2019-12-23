@@ -10,12 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumerService {
 
-  @KafkaListener(topics = {"pull-input-config"})
+  @KafkaListener(topics = {"stream-calc-test"})
   public void consume(Object o) {
     System.out.println("kafka:" + o.toString());
-    System.out.println("kafka");
-    System.out.println("kafka");
-    System.out.println("kafka");
   }
 }
 

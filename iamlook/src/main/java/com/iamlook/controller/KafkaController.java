@@ -1,5 +1,6 @@
 package com.iamlook.controller;
 
+import com.iamlook.bean.Order;
 import com.iamlook.kafka.KafkaProducerService;
 import com.iamlook.response.BaseResponse;
 import com.iamlook.response.Feed;
@@ -28,6 +29,17 @@ public class KafkaController {
 
     @Autowired
     private KafkaProducerService kafkaProducerService;
+
+    @PostMapping("/sendTest")
+    public BaseResponse<String> sendTest(@RequestBody @Valid Order order) {
+        order.setSiteId((int)(Math.random()*(100-1+1)));
+        order.setOrderId((int)(Math.random()*(100-1+1)));
+        order.setMerchandiseId((int)(Math.random()*(100-1+1)));
+        order.setPrice(Math.random()*(100-1+1));
+        order.setTimestamp(new Date().getTime());
+        kafkaProducerService.send(order);
+        return BaseResponse.success(null);
+    }
 
     @PostMapping("/send")
     public BaseResponse<String> addUser(@RequestBody @Valid UserRequest ur) {
