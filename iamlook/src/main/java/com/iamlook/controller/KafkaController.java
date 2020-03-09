@@ -57,7 +57,7 @@ public class KafkaController {
 
     @PostMapping("/sendFlink")
     public BaseResponse<String> sendFlink(@RequestBody @Valid OriginalInput input, HttpServletRequest request) {
-        input.setTime(new Date().getTime() + (int)(Math.random()*(100-1+1)));
+        //input.setTime(new Date().getTime() + (int)(Math.random()*(100-1+1)));
         kafkaProducerService.send(input);
         System.out.println(getIpAddr(request));
         return BaseResponse.success(null);

@@ -43,4 +43,5 @@ public class OriginalInput {
      * 时间
      */
     private Long time;
+    private int from;
 }

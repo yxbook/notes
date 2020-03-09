@@ -1,0 +1,4 @@
+下载logstash包以及mysql驱动包
+
+进入bin目录执行
+./logstash -f /home/sddt/zm/logstash/dosage/mysql-logstash-half.conf
