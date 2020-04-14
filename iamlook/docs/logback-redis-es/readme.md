@@ -33,7 +33,7 @@ input {
         host => "192.168.188.91" #redis地址
         codec => "json"
         port => 26380 #redis端口号
-        type => "redis-cluster-input"
+        type => "redis-cluster-input" # redis集群需要
     }
 }
 output {
