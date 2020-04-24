@@ -52,6 +52,20 @@ public class CallableTest {
     }
 }
 
+    // FutureTask的使用例子
+
+    /*List<FutureTask<CallVo>> futureTaskList = new ArrayList<>();
+    List<String> failList = new ArrayList<>();
+    //构建Callable
+    groupByFeedMap.forEach((k, v) -> {
+            futureTaskList.add(new FutureTask<CallVo>(new ProcessCallable(dosageVo.getTaskId(),
+    groupNum, k, v, this)));
+    });
+    //多线程处理half hour索引的用量
+    for (FutureTask<CallVo> futureTask : futureTaskList) {
+         processPool.execute(futureTask);
+    }*/
+
 
 
 class MyCallable implements Callable<Object> {
